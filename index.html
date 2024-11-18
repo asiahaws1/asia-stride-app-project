@@ -1,1 +1,25 @@
-<link href="./output.css" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stride App</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-container">
+    <h1>Self-Care Planner</h1>
+    <label for="mood-select">How are you feeling today?</label>
+    <select id="mood-select">
+      <option value="" disabled selected>Select your mood</option>
+      <option value="Happy">Happy</option>
+      <option value="Calm">Calm</option>
+      <option value="Motivated">Motivated</option>
+      <option value="Stressed">Stressed</option>
+      <option value="Tired">Tired</option>
+    </select>
+    <p id="selected-mood">Your current mood: <span id="mood-display">Not selected</span></p>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
