@@ -129,3 +129,16 @@ newTaskInput.addEventListener('keypress', (event) => {
     addTask();
   }
 });
+
+
+function displayCurrentDate() {
+  const currentDateElement = document.getElementById('current-date');
+  const today = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = today.toLocaleDateString(undefined, options);
+
+  currentDateElement.textContent = `Today's Date: ${formattedDate}`;
+}
+
+
+
