@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stride App</title>
   <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
   <div class="app-container">
     <h1>Self-Care Planner</h1>
+
+
     <label for="mood-select">Welcome, User! How are you feeling today?</label>
     <select id="mood-select">
       <option value="" disabled selected>Select your mood</option>
@@ -18,7 +22,12 @@
       <option value="Stressed">Stressed</option>
       <option value="Tired">Tired</option>
     </select>
-    <p id="selected-mood">Your current mood: <span id="mood-display">Not selected</span></p>
+    <p>Your current mood: <span id="mood-display">Not selected</span></p>
+
+    <h3>Mood History</h3>
+    <ul id="mood-history"></ul>
+
+
     <div>
       <nav class="navbar">
         <ul>
@@ -28,14 +37,27 @@
         </ul>
       </nav>
     </div>
+
+
     <h2>Add New Task</h2>
     <label for="new-task">Task:</label>
     <input type="text" id="new-task" placeholder="Enter your task here">
+
+
+    <label for="task-category">Category:</label>
+    <input type="text" id="task-category" placeholder="Enter task category (e.g., Work, Personal)">
+
+
+    <label for="task-due-date">Due Date:</label>
+    <input type="date" id="task-due-date">
+
     <button id="add-task">Add Task</button>
+
     <h2>Task List</h2>
-    <ul id="task-list">
-    </ul>
+    <ul id="task-list"></ul>
   </div>
+
   <script src="index.js"></script>
 </body>
+
 </html>
