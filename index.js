@@ -1,31 +1,33 @@
 const moodSelect = document.getElementById('mood-select');
 const moodDisplay = document.getElementById('mood-display');
-const moodHistoryContainer = document.createElement('ul');
+const moodHistoryContainer = document.getElementById('mood-history');
+const journalPrompt = document.getElementById('journal-prompt');
+const journalEntry = document.getElementById('journal-entry');
 const newTaskInput = document.getElementById('new-task');
 const addTaskButton = document.getElementById('add-task');
 const taskList = document.getElementById('task-list');
-const categoryInput = document.createElement('input');
-const dueDateInput = document.createElement('input');
-categoryInput.setAttribute('placeholder', 'Enter category (e.g., Work, Personal)');
-dueDateInput.setAttribute('type', 'date');
-const categoryLabel = document.createElement('label');
-categoryLabel.textContent = 'Task Category:';
-categoryLabel.appendChild(categoryInput);
-const dueDateLabel = document.createElement('label');
-dueDateLabel.textContent = 'Due Date:';
-dueDateLabel.appendChild(dueDateInput);
-document.body.insertBefore(categoryLabel, taskList);
-document.body.insertBefore(dueDateLabel, taskList);
+const categoryInput = document.getElementById('task-category');
+const dueDateInput = document.getElementById('task-due-date');
+
+const journalPrompts = {
+  Happy: "What made you feel happy today?",
+  Calm: "Describe something that brought you peace today.",
+  Motivated: "What is your main goal right now, and why is it important?",
+  Stressed: "What do you usually do for self care?",
+  Tired: "What can you do to recharge and feel more energized?"
+};
 
 function loadMood() {
   const savedMood = localStorage.getItem('selectedMood');
   const moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
+  
   if (savedMood) {
     moodDisplay.textContent = savedMood;
     moodSelect.value = savedMood;
   } else {
     moodDisplay.textContent = 'Not selected';
   }
+  
   displayMoodHistory(moodHistory);
 }
 
@@ -44,19 +46,17 @@ function displayMoodHistory(history) {
     listItem.textContent = `Mood ${index + 1}: ${mood}`;
     moodHistoryContainer.appendChild(listItem);
   });
-  if (!document.body.contains(moodHistoryContainer)) {
-    document.body.appendChild(moodHistoryContainer);
-  }
 }
 
 moodSelect.addEventListener('change', () => {
   const selectedMood = moodSelect.value;
-  moodDisplay.textContent = selectedMood ? selectedMood : 'Not selected';
-  saveMood(selectedMood);
-  if (selectedMood && journalPrompts[selectedMood]) {
-    journalPrompt.textContent = journalPrompts[selectedMood];
+  if (selectedMood) {
+    moodDisplay.textContent = selectedMood;
+    saveMood(selectedMood);
+    journalPrompt.textContent = journalPrompts[selectedMood] || 'No prompt available.';
   } else {
-    journalPrompt.textContent = 'You must first select a mood to see a journal prompt.';
+    moodDisplay.textContent = 'Not selected';
+    journalPrompt.textContent = 'You must select a mood to see a journal prompt.';
   }
   journalEntry.value = '';
 });
@@ -64,60 +64,35 @@ moodSelect.addEventListener('change', () => {
 loadMood();
 
 function addTask() {
-  const taskText = newTaskInput.value;
-  const categoryText = categoryInput.value;
+  const taskText = newTaskInput.value.trim();
+  const categoryText = categoryInput.value.trim();
   const dueDateValue = dueDateInput.value;
+
   if (!taskText || !categoryText || !dueDateValue) {
-    alert('Please enter a category and a due date for your task.');
+    alert('Please enter all fields (task, category, and due date).');
     return;
   }
+
   const listItem = document.createElement('li');
-  const taskTextElement = document.createElement('span');
-  taskTextElement.textContent = `Task: ${taskText}`;
-  listItem.appendChild(taskTextElement);
-  const categoryElement = document.createElement('span');
-  categoryElement.textContent = ` | Category: ${categoryText}`;
-  listItem.appendChild(categoryElement);
-  const dueDateElement = document.createElement('span');
-  dueDateElement.textContent = ` | Due: ${new Date(dueDateValue).toLocaleDateString()}`;
-  listItem.appendChild(dueDateElement);
+  listItem.innerHTML = `
+    <span>Task: ${taskText}</span> |
+    <span>Category: ${categoryText}</span> |
+    <span>Due: ${new Date(dueDateValue).toLocaleDateString()}</span>
+  `;
+
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'Delete';
-  deleteButton.addEventListener('click', () => {
-    taskList.removeChild(listItem);
-  });
+  deleteButton.addEventListener('click', () => taskList.removeChild(listItem));
   listItem.appendChild(deleteButton);
+
   taskList.appendChild(listItem);
+
   newTaskInput.value = '';
   categoryInput.value = '';
   dueDateInput.value = '';
 }
 
 addTaskButton.addEventListener('click', addTask);
-
 newTaskInput.addEventListener('keypress', (event) => {
-  if (event.key === 'Enter') {
-    addTask();
-  }
+  if (event.key === 'Enter') addTask();
 });
-
-function displayCurrentDate() {
-  const currentDateElement = document.getElementById('current-date');
-  const today = new Date();
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const formattedDate = today.toLocaleDateString(undefined, options);
-  currentDateElement.textContent = `Today's Date: ${formattedDate}`;
-}
-
-displayCurrentDate();
-
-const journalPrompts = {
-  Happy: "What made you feel happy today?",
-  Calm: "Describe something that brought you peace today.",
-  Motivated: "What is your main goal right now, and why is it important?",
-  Stressed: "What do you usually do for self care?",
-  Tired: "What can you do to recharge and feel more energized?"
-};
-
-const journalPrompt = document.getElementById('journal-prompt');
-const journalEntry = document.getElementById('journal-entry');
