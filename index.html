@@ -10,12 +10,16 @@
 
 <body>
   <div class="app-container">
+    <nav class="navbar">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tasks">Tasks</a></li>
+        <li><a href="#planner">Planner</a></li>
+      </ul>
+    </nav>
 
     <div id="current-date" aria-label="Today's Date"></div>
-
-
     <h1>Stride App</h1>
-
 
     <label for="mood-select">Welcome, Asia! How are you feeling today?</label>
     <select id="mood-select">
@@ -28,47 +32,29 @@
     </select>
     <p>Your current mood: <span id="mood-display">Not selected</span></p>
 
-
     <h3>Mood History</h3>
     <ul id="mood-history"></ul>
 
-
-    <div>
-      <nav class="navbar">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#tasks">Tasks</a></li>
-          <li><a href="#planner">Planner</a></li>
-        </ul>
-      </nav>
-    </div>
-
     <h2>Journal Entry</h2>
-<label for="journal-prompt">Journal Prompt:</label>
-<p id="journal-prompt">You must select a mood to see a journal prompt.</p>
-
-<textarea id="journal-entry" placeholder="Write your journal entry here..."></textarea>
-
+    <label for="journal-prompt">Journal Prompt:</label>
+    <p id="journal-prompt">You must select a mood to see a journal prompt.</p>
+    <textarea id="journal-entry" placeholder="Write your journal entry here..."></textarea>
 
     <h2>Add New Task</h2>
     <label for="new-task">Task:</label>
     <input type="text" id="new-task" placeholder="Enter your task here">
 
-
     <label for="task-category">Category:</label>
     <input type="text" id="task-category" placeholder="Enter task category (e.g., Work, Personal)">
-
 
     <label for="task-due-date">Due Date:</label>
     <input type="date" id="task-due-date">
 
     <button id="add-task">Add Task</button>
 
-
     <h2>Task List</h2>
     <ul id="task-list"></ul>
   </div>
-  
 
   <script src="index.js"></script>
 </body>
