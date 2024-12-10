@@ -2,6 +2,7 @@ const moodSelect = document.getElementById('mood-select');
 const moodDisplay = document.getElementById('mood-display');
 const moodHistory = document.getElementById('mood-history');
 const journalPrompt = document.getElementById('journal-prompt');
+
 const prompts = {
   Happy: 'What made you feel happy today?',
   Calm: 'What helped you feel calm today?',
@@ -10,27 +11,44 @@ const prompts = {
   Tired: 'What made you feel tired, and how can you recharge?'
 };
 
-const addTaskButton = document.getElementById('add-task');
-const taskList = document.getElementById('task-list');
-let tasks = [];
+const moodEmojis = {
+  Happy: '😊',
+  Calm: '😌',
+  Motivated: '💪',
+  Stressed: '😫',
+  Tired: '😴'
+};
 
 moodSelect.addEventListener('change', () => {
   const mood = moodSelect.value;
   if (!mood) return;
-  moodDisplay.textContent = mood;
+
+  moodDisplay.innerHTML = `${mood} ${moodEmojis[mood] || ''}`;
+  moodHistory.innerHTML = '';
   const historyItem = document.createElement('li');
-  historyItem.textContent = mood;
+  historyItem.innerHTML = `${mood} ${moodEmojis[mood] || ''}`;
   moodHistory.appendChild(historyItem);
   journalPrompt.textContent = prompts[mood] || 'You must select a mood to see a journal prompt.';
 });
+
+function displayCurrentDate() {
+  const currentDateElement = document.getElementById('date-display');
+  const today = new Date();
+  const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  currentDateElement.textContent = `Today's Date: ${formattedDate}`;
+}
+
+const addTaskButton = document.getElementById('add-task');
+const taskList = document.getElementById('task-list');
+let tasks = [];
 
 addTaskButton.addEventListener('click', () => {
   const newTaskInput = document.getElementById('new-task');
   const newTaskCategoryInput = document.getElementById('task-category');
   const newTaskDueDateInput = document.getElementById('task-due-date');
 
-  const taskText = newTaskInput.value.trim();
-  const taskCategory = newTaskCategoryInput.value.trim();
+  const taskText = newTaskInput.value;
+  const taskCategory = newTaskCategoryInput.value;
   const taskDueDate = newTaskDueDateInput.value;
 
   if (!taskText) return;
@@ -93,11 +111,11 @@ function renderGoals() {
       goalList.appendChild(li);
     }
   });
-};
+}
 
 addGoalButton.addEventListener('click', () => {
   const newGoalInput = document.getElementById('new-goal');
-  const goalText = newGoalInput.value.trim();
+  const goalText = newGoalInput.value;
 
   if (!goalText) return;
 
@@ -121,3 +139,4 @@ themeToggle.addEventListener('click', () => {
 });
 
 document.body.classList.add('light-mode');
+displayCurrentDate();

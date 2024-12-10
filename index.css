@@ -3,16 +3,16 @@
 }
 
 body.light-mode {
-  --background-color: #f0f0f0;
+  --background-color: linear-gradient(to bottom, #d3eaf7, #d7bde0);
   --text-color: #333;
-  --card-bg-color: #fff;
+  --card-bg-color: #ffffff;
   --input-bg-color: #fff;
   --input-text-color: #333;
   --button-bg-color: #4caf50;
 }
 
 body.dark-mode {
-  --background-color: #333;
+  --background-color: linear-gradient(to bottom, #555, #333);
   --text-color: #f0f0f0;
   --card-bg-color: #000;
   --input-bg-color: #555;
@@ -23,20 +23,20 @@ body.dark-mode {
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: var(--background-color);
+  font-family: 'Arial', sans-serif;
+  background: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
-  max-width: 800px;
-  margin: 60px auto;
+  max-width: 1000px;
+  margin: 80px auto 40px auto;
   padding: 20px;
   background: var(--card-bg-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  border-radius: 12px;
   transition: background-color 0.3s ease;
 }
 
@@ -45,15 +45,15 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--button-bg-color);
-  padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
 
 .navbar ul {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -64,25 +64,39 @@ body {
   color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
-  padding: 5px 10px;
-  border-radius: 4px;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.navbar a:hover {
+  background-color: rgba(200, 200, 200, 0.2);
+}
+
+.theme-toggle {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: #45a049;
 }
 
 #current-date {
-  background-color: var(--button-bg-color);
+  background-color: rgba(255, 255, 255, 0.9);
   color: var(--text-color);
   font-size: 18px;
   padding: 8px;
-  border-radius: 4px;
+  border-radius: 8px;
   text-align: center;
   margin: 20px 0;
-}
-
-label {
-  display: block;
-  margin: 10px 0;
-  font-weight: bold;
 }
 
 input[type="text"],
@@ -90,10 +104,10 @@ input[type="date"],
 select,
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 8px 0 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 16px;
   max-width: 100%;
   background-color: var(--input-bg-color);
@@ -102,16 +116,16 @@ textarea {
 }
 
 textarea {
-  height: 100px;
+  height: 120px;
   resize: none;
 }
 
 button {
-  background-color: var(--button-bg-color);
+  background-color: #4caf50;
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
   transition: background 0.3s ease;
@@ -137,22 +151,22 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  margin: 5px 0;
-  background-color: var(--card-bg-color);
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px;
+  margin: 6px 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   font-size: 16px;
-  transition: background-color 0.3s ease;
 }
 
 .edit-btn,
 .complete-btn {
-  padding: 5px 10px;
+  padding: 6px 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   color: white;
+  font-size: 14px;
 }
 
 .edit-btn {
@@ -169,29 +183,4 @@ button:hover {
 
 .complete-btn:hover {
   background-color: #c0392b;
-}
-
-#journal-entry {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  width: 100%;
-  max-width: 100%;
-  background-color: var(--card-bg-color);
-  color: var(--text-color);
-}
-
-#new-task,
-#task-category,
-#task-due-date,
-#new-goal {
-  padding: 10px;
-  margin: 8px 0 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: var(--input-bg-color);
-  color: var(--input-text-color);
-  transition: background-color 0.3s ease;
 }
