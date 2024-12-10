@@ -1,105 +1,112 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const moodSelect = document.getElementById('mood-select');
-  const moodDisplay = document.getElementById('mood-display');
-  const moodHistoryContainer = document.getElementById('mood-history');
-  const journalPrompt = document.getElementById('journal-prompt');
-  const journalEntry = document.getElementById('journal-entry');
-  const newTaskInput = document.getElementById('new-task');
-  const addTaskButton = document.getElementById('add-task');
-  const taskList = document.getElementById('task-list');
-  const categoryInput = document.getElementById('task-category');
-  const dueDateInput = document.getElementById('task-due-date');
+const moodSelect = document.getElementById('mood-select');
+const moodDisplay = document.getElementById('mood-display');
+const moodHistory = document.getElementById('mood-history');
+const journalPrompt = document.getElementById('journal-prompt');
+const prompts = {
+  Happy: 'What made you feel happy today?',
+  Calm: 'What helped you feel calm today?',
+  Motivated: 'What’s driving your motivation today?',
+  Stressed: 'What’s causing stress today, and how can you address it?',
+  Tired: 'What made you feel tired, and how can you recharge?'
+};
 
-  const journalPrompts = {
-    Happy: "What made you feel happy today?",
-    Calm: "Describe something that brought you peace today.",
-    Motivated: "What is your main goal right now, and why is it important?",
-    Stressed: "What do you usually do for self care?",
-    Tired: "What can you do to recharge and feel more energized?"
-  };
+const taskList = document.getElementById('task-list');
+const addTaskButton = document.getElementById('add-task');
+const newTaskInput = document.getElementById('new-task');
+const taskCategoryInput = document.getElementById('task-category');
+const taskDueDateInput = document.getElementById('task-due-date');
 
-  function loadMood() {
-    const savedMood = localStorage.getItem('selectedMood');
-    const moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
-    
-    if (savedMood) {
-      moodDisplay.textContent = savedMood;
-      moodSelect.value = savedMood;
-    } else {
-      moodDisplay.textContent = 'Not selected';
-    }
-    
-    displayMoodHistory(moodHistory);
-  }
+const goalList = document.getElementById('goal-list');
+const completedGoalList = document.getElementById('completed-goals');
+const addGoalButton = document.getElementById('add-goal');
+const newGoalInput = document.getElementById('new-goal');
 
-  function saveMood(mood) {
-    localStorage.setItem('selectedMood', mood);
-    const moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
-    moodHistory.push(mood);
-    localStorage.setItem('moodHistory', JSON.stringify(moodHistory));
-    displayMoodHistory(moodHistory);
-  }
+const tasks = [];
+const goals = [];
+const completedGoals = [];
 
-  function displayMoodHistory(history) {
-    moodHistoryContainer.textContent = '';
-    history.forEach((mood, index) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = `Mood ${index + 1}: ${mood}`;
-      moodHistoryContainer.appendChild(listItem);
-    });
-  }
-
-  moodSelect.addEventListener('change', () => {
-    const selectedMood = moodSelect.value;
-    if (selectedMood) {
-      moodDisplay.textContent = selectedMood;
-      saveMood(selectedMood);
-      journalPrompt.textContent = journalPrompts[selectedMood] || 'No prompt available.';
-    } else {
-      moodDisplay.textContent = 'Not selected';
-      journalPrompt.textContent = 'You must select a mood to see a journal prompt.';
-    }
-    journalEntry.value = '';
-  });
-
-  function addTask() {
-    const taskText = newTaskInput.value.trim();
-    const categoryText = categoryInput.value.trim();
-    const dueDateValue = dueDateInput.value;
-
-    if (!taskText || !categoryText || !dueDateValue) {
-      alert('Please enter all fields (task, category, and due date).');
-      return;
-    }
-
-    const listItem = document.createElement('li');
-    listItem.innerHTML = `
-      <span>Task: ${taskText}</span> |
-      <span>Category: ${categoryText}</span> |
-      <span>Due: ${new Date(dueDateValue).toLocaleDateString()}</span>
-      <button class="complete-btn">Complete Task</button>
-    `;
-
-    const completeButton = listItem.querySelector('.complete-btn');
-    completeButton.addEventListener('click', () => {
-      clearTask(listItem);
-    });
-
-    taskList.appendChild(listItem);
-
-    newTaskInput.value = '';
-    categoryInput.value = '';
-    dueDateInput.value = '';
-  }
-
-  function clearTask(taskItem) {
-    taskList.removeChild(taskItem);
-  }
-
-  addTaskButton.addEventListener('click', addTask);
-  newTaskInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') addTask();
-  });
-
-  loadMood();
+moodSelect.addEventListener('change', () => {
+  const mood = moodSelect.value;
+  if (!mood) return;
+  moodDisplay.textContent = mood;
+  const historyItem = document.createElement('li');
+  historyItem.textContent = mood;
+  moodHistory.appendChild(historyItem);
+  journalPrompt.textContent = prompts[mood] || 'You must select a mood to see a journal prompt.';
 });
+
+addTaskButton.addEventListener('click', () => {
+  const taskName = newTaskInput.value.trim();
+  const category = taskCategoryInput.value.trim();
+  const dueDate = taskDueDateInput.value;
+
+  if (!taskName || !category || !dueDate) {
+    alert('Please fill out all task fields.');
+    return;
+  }
+
+  tasks.push({ taskName, category, dueDate });
+  newTaskInput.value = '';
+  taskCategoryInput.value = '';
+  taskDueDateInput.value = '';
+  renderTasks();
+});
+
+function renderTasks() {
+  taskList.innerHTML = '';
+  tasks.forEach((task, index) => {
+    const li = document.createElement('li');
+    li.textContent = `${task.taskName} - ${task.category} (Due: ${task.dueDate})`;
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => {
+      tasks.splice(index, 1);
+      renderTasks();
+    });
+    li.appendChild(deleteButton);
+    taskList.appendChild(li);
+  });
+}
+
+addGoalButton.addEventListener('click', () => {
+  const goalText = newGoalInput.value.trim();
+  if (!goalText) {
+    alert('Please enter a goal.');
+    return;
+  }
+
+  goals.push(goalText);
+  newGoalInput.value = '';
+  renderGoals();
+});
+
+function renderGoals() {
+  goalList.innerHTML = '';
+  goals.forEach((goal, index) => {
+    const li = document.createElement('li');
+    li.textContent = goal;
+    const completeButton = document.createElement('button');
+    completeButton.textContent = 'Complete';
+    completeButton.addEventListener('click', () => {
+      completedGoals.push(goal);
+      goals.splice(index, 1);
+      renderGoals();
+      renderCompletedGoals();
+    });
+    li.appendChild(completeButton);
+    goalList.appendChild(li);
+  });
+}
+
+function renderCompletedGoals() {
+  completedGoalList.innerHTML = '';
+  completedGoals.forEach(goal => {
+    const li = document.createElement('li');
+    li.textContent = goal;
+    completedGoalList.appendChild(li);
+  });
+}
+
+renderGoals();
+renderCompletedGoals();
+renderTasks();

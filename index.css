@@ -2,144 +2,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f0f0f0;
   color: #333;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .app-container {
-  max-width: 600px;
-  margin: 20px auto;
+  max-width: 800px;
+  margin: 60px auto;
   padding: 20px;
   background: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-}
-
-#current-date {
-  background-color: #4caf50;
-  color: white;
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 8px 8px 0 0;
-  text-align: center;
-}
-
-.navbar {
-  background-color: #4caf50;
-  padding: 10px 0;
-  border-radius: 8px 8px 0 0;
-}
-
-.navbar ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  gap: 20px;
-  padding: 0;
-  margin: 0;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-
-.navbar a:hover {
-  background-color: #45a049;
-}
-
-label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-input[type="text"],
-select,
-textarea,
-input[type="date"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-h2 {
-  margin-top: 20px;
-  border-bottom: 2px solid #4caf50;
-  padding-bottom: 5px;
-}
-
-#task-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#task-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-#task-list .edit-btn,
-#task-list .complete-btn {
-  padding: 5px 10px;
-  border: none;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#task-list .edit-btn {
-  background-color: #3498db;
-}
-
-#task-list .edit-btn:hover {
-  background-color: #2980b9;
-}
-
-#task-list .complete-btn {
-  background-color: #e74c3c;
-}
-
-#task-list .complete-btn:hover {
-  background-color: #c0392b;
-}
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  line-height: 1.5;
 }
 
 .navbar {
@@ -156,19 +30,18 @@ body {
 .navbar ul {
   display: flex;
   justify-content: center;
-  align-items: center;
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 30px;
+  gap: 20px;
 }
 
 .navbar a {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  padding: 8px 12px;
+  padding: 5px 10px;
   border-radius: 4px;
 }
 
@@ -176,43 +49,32 @@ body {
   background-color: #45a049;
 }
 
-.app-container {
-  margin: 80px auto 20px;
-  padding: 20px;
-  max-width: 800px;
-  background: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
 #current-date {
   background-color: #4caf50;
   color: white;
   font-size: 18px;
-  padding: 10px;
+  padding: 8px;
+  border-radius: 4px;
   text-align: center;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  margin: 20px 0;
 }
 
 label {
   display: block;
-  margin-top: 15px;
+  margin: 10px 0;
   font-weight: bold;
-  font-size: 1rem;
 }
 
 input[type="text"],
+input[type="date"],
 select,
-textarea,
-input[type="date"] {
+textarea {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0 20px;
+  padding: 10px;
+  margin: 8px 0 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  background-color: #f9f9f9;
 }
 
 textarea {
@@ -226,73 +88,67 @@ button {
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
-  font-size: 16px;
   cursor: pointer;
-  display: inline-block;
+  font-size: 16px;
+  transition: background 0.3s ease;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
-h1,
-h2,
-h3 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-h2 {
-  border-bottom: 2px solid #4caf50;
-  padding-bottom: 5px;
-}
-
-#task-list {
+#task-list,
+#goal-list,
+#completed-goals,
+#mood-history {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 10px 0;
 }
 
-#task-list li {
+#task-list li,
+#goal-list li,
+#completed-goals li,
+#mood-history li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  margin: 10px 0;
-  background-color: #f1f1f1;
+  margin: 5px 0;
+  background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
 }
 
-#task-list .edit-btn,
-#task-list .complete-btn {
+.edit-btn,
+.complete-btn {
   padding: 5px 10px;
   border: none;
-  color: white;
   border-radius: 4px;
   cursor: pointer;
+  color: white;
 }
 
-#task-list .edit-btn {
+.edit-btn {
   background-color: #3498db;
 }
 
-#task-list .edit-btn:hover {
-  background-color: #2980b9;
-}
-
-#task-list .complete-btn {
+.complete-btn {
   background-color: #e74c3c;
 }
 
-#task-list .complete-btn:hover {
+.edit-btn:hover {
+  background-color: #2980b9;
+}
+
+.complete-btn:hover {
   background-color: #c0392b;
 }
 
-footer {
-  text-align: center;
-  margin: 20px 0;
-  font-size: 0.9rem;
-  color: #666;
+#journal-entry {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
