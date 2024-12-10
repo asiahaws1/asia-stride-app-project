@@ -12,60 +12,69 @@
   <div class="app-container">
     <nav class="navbar">
       <ul>
-        <li><a href="#home">Mood</a></li>
-        <li><a href="#tasks">Planner</a></li>
-        <li><a href="#planner">Goals</a></li>
-        <li><a href="#planner">Journal</a></li>
+        <li><a href="#mood-section">Mood</a></li>
+        <li><a href="#tasks-section">Tasks</a></li>
+        <li><a href="#goals-section">Goals</a></li>
+        <li><a href="#journal-section">Journal</a></li>
       </ul>
     </nav>
 
     <div id="current-date" aria-label="Today's Date"></div>
-    <h1>Stride App</h1>
+    <section id="mood-section">
+      <h1>Stride App</h1>
 
-    <label for="mood-select">Welcome, Asia! How are you feeling today?</label>
-    <select id="mood-select">
-      <option value="" disabled selected>Select your mood</option>
-      <option value="Happy">Happy</option>
-      <option value="Calm">Calm</option>
-      <option value="Motivated">Motivated</option>
-      <option value="Stressed">Stressed</option>
-      <option value="Tired">Tired</option>
-    </select>
-    <p>Your current mood: <span id="mood-display">Not selected</span></p>
 
-    <h3>Mood History</h3>
-    <ul class="mood-history"></ul>
+      <label for="mood-select">Welcome, Asia! How are you feeling today?</label>
+      <select id="mood-select">
+        <option value="" disabled selected>Select your mood</option>
+        <option value="Happy">Happy</option>
+        <option value="Calm">Calm</option>
+        <option value="Motivated">Motivated</option>
+        <option value="Stressed">Stressed</option>
+        <option value="Tired">Tired</option>
+      </select>
+      <p>Your current mood: <span id="mood-display">Not selected</span></p>
 
-    <h2>Journal Entry</h2>
-    <label for="journal-prompt">Journal Prompt:</label>
-    <p id="journal-prompt">You must select a mood to see a journal prompt.</p>
-    <textarea id="journal-entry" placeholder="Write your journal entry here..."></textarea>
+      <h3>Mood History</h3>
+      <ul id="mood-history"></ul>
+    </section>
 
-    <h2>Add New Task</h2>
-    <label for="new-task">Task:</label>
-    <input type="text" id="new-task" placeholder="Enter your task here">
+    <section id="journal-section">
+      <h2>Journal Entry</h2>
+      <label for="journal-prompt">Journal Prompt:</label>
+      <p id="journal-prompt">You must select a mood to see a journal prompt.</p>
+      <textarea id="journal-entry" placeholder="Write your journal entry here..."></textarea>
+    </section>
 
-    <label for="task-category">Category:</label>
-    <input type="text" id="task-category" placeholder="Enter task category (e.g., Work, Personal)">
+    <section id="tasks-section">
+      <h2>Add New Task</h2>
+      <label for="new-task">Task:</label>
+      <input type="text" id="new-task" placeholder="Enter your task here">
 
-    <label for="task-due-date">Due Date:</label>
-    <input type="date" id="task-due-date">
+      <label for="task-category">Category:</label>
+      <input type="text" id="task-category" placeholder="Enter task category (e.g., Work, Personal)">
 
-    <button id="add-task">Add Task</button>
+      <label for="task-due-date">Due Date:</label>
+      <input type="date" id="task-due-date">
 
-    <h2>Task List</h2>
-    <ul class="task-list"></ul>
+      <button id="add-task">Add Task</button>
 
-    <div class="goals-section">
+      <h2>Task List</h2>
+      <ul id="task-list"></ul>
+    </section>
+
+    <section id="goals-section">
       <h2>Goals</h2>
       <label for="new-goal">Set a Goal:</label>
       <input type="text" id="new-goal" placeholder="Enter your goal here">
       <button id="add-goal">Add Goal</button>
+
       <h3>Goal List</h3>
-      <ul class="goal-list"></ul>
+      <ul id="goal-list"></ul>
+
       <h3>Completed Goals</h3>
-      <ul class="completed-goals"></ul>
-    </div>
+      <ul id="completed-goals"></ul>
+    </section>
   </div>
 
   <script src="index.js"></script>

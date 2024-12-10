@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -71,10 +75,11 @@ select,
 textarea {
   width: 100%;
   padding: 10px;
-  margin: 8px 0 20px;
+  margin: 8px 0 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  max-width: 100%;
 }
 
 textarea {
@@ -148,6 +153,19 @@ button:hover {
 
 #journal-entry {
   padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 100%;
+}
+
+#new-task,
+#task-category,
+#task-due-date,
+#new-goal {
+  padding: 10px;
+  margin: 8px 0 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
