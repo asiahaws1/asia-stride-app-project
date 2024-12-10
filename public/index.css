@@ -4,11 +4,17 @@
 
 body.light-mode {
   --background-color: linear-gradient(to bottom, #d3eaf7, #d7bde0);
-  --text-color: #333;
+  --text-color: #9B0061;
   --card-bg-color: #ffffff;
   --input-bg-color: #fff;
-  --input-text-color: #333;
-  --button-bg-color: #4caf50;
+  --input-text-color: #9B0061;
+  --button-bg-color: #e06691;
+  --button-hover-bg-color: #e06691;
+  --navbar-bg-color: #fff;
+  --welcome-bg-color: #f0f0f0;
+  --mood-history-bg-color: #ffe6f7;
+  --task-list-bg-color: #ffe6f7;
+  --goals-list-bg-color: #ffe6f7;
 }
 
 body.dark-mode {
@@ -18,6 +24,11 @@ body.dark-mode {
   --input-bg-color: #555;
   --input-text-color: #fff;
   --button-bg-color: #555;
+  --navbar-bg-color: #333;
+  --welcome-bg-color: #444;
+  --mood-history-bg-color: #222;
+  --task-list-bg-color: #222;
+  --goals-list-bg-color: #222;
 }
 
 body {
@@ -35,7 +46,7 @@ body {
   margin: 80px auto 40px auto;
   padding: 20px 30px;
   background: var(--card-bg-color);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   transition: background-color 0.3s ease;
 }
@@ -45,9 +56,9 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--navbar-bg-color);
   padding: 8px 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
@@ -63,20 +74,20 @@ body {
 .navbar a {
   color: var(--text-color);
   text-decoration: none;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 1.6rem;
   padding: 6px 12px;
   border-radius: 8px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .navbar a:hover {
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: rgba(255, 182, 193, 0.4);
 }
 
 .theme-toggle {
   padding: 8px 16px;
-  background-color: #4caf50;
+  background-color: #e06691;
   color: white;
   border: none;
   border-radius: 8px;
@@ -86,11 +97,11 @@ body {
 }
 
 .theme-toggle:hover {
-  background-color: #45a049;
+  background-color: #d1548e;
 }
 
 #current-date {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--welcome-bg-color);
   color: var(--text-color);
   font-size: 16px;
   padding: 8px 12px;
@@ -118,18 +129,18 @@ textarea {
 }
 
 button {
-  background-color: #4caf50;
+  background-color: #e06691;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #d1548e;
 }
 
 #task-list,
@@ -150,8 +161,8 @@ button:hover {
   align-items: center;
   padding: 10px 12px;
   margin: 4px 0;
-  background-color: #f3f4f6;
-  border: 1px solid #ddd;
+  background-color: var(--mood-history-bg-color);
+  border: 1px solid #e2a0bf;
   border-radius: 8px;
   font-size: 14px;
 }
@@ -167,26 +178,26 @@ button:hover {
 }
 
 .edit-btn {
-  background-color: #3498db;
+  background-color: #d19eff;
 }
 
 .complete-btn {
-  background-color: #e74c3c;
+  background-color: #ffa3b1;
 }
 
 .edit-btn:hover {
-  background-color: #2980b9;
+  background-color: #b287ff;
 }
 
 .complete-btn:hover {
-  background-color: #c0392b;
+  background-color: #ff6f91;
 }
 
 .journal-section,
 .mood-section,
 .tasks-section,
 .goals-section {
-  background: linear-gradient(to bottom, #f8d7da, #f3e5f5, #e0f7fa, #fff9c4);
+  background: linear-gradient(to bottom, #ffe6f7, #ffdde1);
   padding: 16px 20px;
   border-radius: 12px;
   margin: 16px 0;

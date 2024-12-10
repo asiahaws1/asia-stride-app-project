@@ -21,7 +21,7 @@ const moodEmojis = {
 
 let moodSelections = [];
 
-moodSelect.addEventListener('change', () => {
+moodSelect.addEventListener('change', async () => {
   const mood = moodSelect.value;
   if (!mood) return;
 
@@ -29,6 +29,20 @@ moodSelect.addEventListener('change', () => {
   const historyItem = document.createElement('li');
   historyItem.innerHTML = `${mood} ${moodEmojis[mood] || ''}`;
   moodHistory.appendChild(historyItem);
+
+  try {
+    await fetch('http://localhost:3000/mood-history', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mood })
+    });
+
+    const response = await fetch('http://localhost:3000/mood-history');
+    const historyData = await response.json();
+    console.log('Mood history fetched:', historyData);
+  } catch (error) {
+    console.error('Error sending mood history:', error);
+  }
 
   moodSelections.push(mood);
   journalPrompt.textContent = prompts[mood] || 'You must select a mood to see a journal prompt.';
@@ -177,6 +191,8 @@ addGoalButton.addEventListener('click', () => {
   renderGoals();
 });
 
+document.body.classList.add('light-mode');
+
 const themeToggle = document.getElementById('theme-toggle');
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
@@ -186,5 +202,4 @@ themeToggle.addEventListener('click', () => {
     : 'Switch to Dark Mode';
 });
 
-document.body.classList.add('light-mode');
 displayCurrentDate();
