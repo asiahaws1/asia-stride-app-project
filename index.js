@@ -10,20 +10,9 @@ const prompts = {
   Tired: 'What made you feel tired, and how can you recharge?'
 };
 
-const taskList = document.getElementById('task-list');
 const addTaskButton = document.getElementById('add-task');
-const newTaskInput = document.getElementById('new-task');
-const taskCategoryInput = document.getElementById('task-category');
-const taskDueDateInput = document.getElementById('task-due-date');
-
-const goalList = document.getElementById('goal-list');
-const completedGoalList = document.getElementById('completed-goals');
-const addGoalButton = document.getElementById('add-goal');
-const newGoalInput = document.getElementById('new-goal');
-
-const tasks = [];
-const goals = [];
-const completedGoals = [];
+const taskList = document.getElementById('task-list');
+let tasks = [];
 
 moodSelect.addEventListener('change', () => {
   const mood = moodSelect.value;
@@ -36,27 +25,35 @@ moodSelect.addEventListener('change', () => {
 });
 
 addTaskButton.addEventListener('click', () => {
-  const taskName = newTaskInput.value.trim();
-  const category = taskCategoryInput.value.trim();
-  const dueDate = taskDueDateInput.value;
+  const newTaskInput = document.getElementById('new-task');
+  const newTaskCategoryInput = document.getElementById('task-category');
+  const newTaskDueDateInput = document.getElementById('task-due-date');
 
-  if (!taskName || !category || !dueDate) {
-    alert('Please fill out all task fields.');
-    return;
-  }
+  const taskText = newTaskInput.value.trim();
+  const taskCategory = newTaskCategoryInput.value.trim();
+  const taskDueDate = newTaskDueDateInput.value;
 
-  tasks.push({ taskName, category, dueDate });
-  newTaskInput.value = '';
-  taskCategoryInput.value = '';
-  taskDueDateInput.value = '';
+  if (!taskText) return;
+
+  const task = {
+    text: taskText,
+    category: taskCategory,
+    dueDate: taskDueDate,
+    complete: false
+  };
+
+  tasks.push(task);
   renderTasks();
+  newTaskInput.value = '';
+  newTaskCategoryInput.value = '';
+  newTaskDueDateInput.value = '';
 });
 
 function renderTasks() {
   taskList.innerHTML = '';
   tasks.forEach((task, index) => {
     const li = document.createElement('li');
-    li.textContent = `${task.taskName} - ${task.category} (Due: ${task.dueDate})`;
+    li.textContent = `${task.text} - ${task.category} - Due: ${task.dueDate}`;
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
@@ -68,45 +65,59 @@ function renderTasks() {
   });
 }
 
-addGoalButton.addEventListener('click', () => {
-  const goalText = newGoalInput.value.trim();
-  if (!goalText) {
-    alert('Please enter a goal.');
-    return;
-  }
+const goalList = document.getElementById('goal-list');
+const completedGoalsList = document.getElementById('completed-goals');
+const addGoalButton = document.getElementById('add-goal');
+let goals = [];
 
-  goals.push(goalText);
+function renderGoals() {
+  goalList.innerHTML = '';
+  completedGoalsList.innerHTML = '';
+
+  goals.forEach((goal, index) => {
+    const li = document.createElement('li');
+    li.textContent = goal.text;
+
+    const markCompleteButton = document.createElement('button');
+    markCompleteButton.textContent = 'Mark as Completed';
+    markCompleteButton.addEventListener('click', () => {
+      goal.complete = !goal.complete;
+      renderGoals();
+    });
+
+    li.appendChild(markCompleteButton);
+
+    if (goal.complete) {
+      completedGoalsList.appendChild(li);
+    } else {
+      goalList.appendChild(li);
+    }
+  });
+};
+
+addGoalButton.addEventListener('click', () => {
+  const newGoalInput = document.getElementById('new-goal');
+  const goalText = newGoalInput.value.trim();
+
+  if (!goalText) return;
+
+  const newGoal = {
+    text: goalText,
+    complete: false
+  };
+
+  goals.push(newGoal);
   newGoalInput.value = '';
   renderGoals();
 });
 
-function renderGoals() {
-  goalList.innerHTML = '';
-  goals.forEach((goal, index) => {
-    const li = document.createElement('li');
-    li.textContent = goal;
-    const completeButton = document.createElement('button');
-    completeButton.textContent = 'Complete';
-    completeButton.addEventListener('click', () => {
-      completedGoals.push(goal);
-      goals.splice(index, 1);
-      renderGoals();
-      renderCompletedGoals();
-    });
-    li.appendChild(completeButton);
-    goalList.appendChild(li);
-  });
-}
+const themeToggle = document.getElementById('theme-toggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  document.body.classList.toggle('light-mode');
+  themeToggle.textContent = document.body.classList.contains('dark-mode')
+    ? 'Switch to Light Mode'
+    : 'Switch to Dark Mode';
+});
 
-function renderCompletedGoals() {
-  completedGoalList.innerHTML = '';
-  completedGoals.forEach(goal => {
-    const li = document.createElement('li');
-    li.textContent = goal;
-    completedGoalList.appendChild(li);
-  });
-}
-
-renderGoals();
-renderCompletedGoals();
-renderTasks();
+document.body.classList.add('light-mode');

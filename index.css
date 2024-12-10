@@ -2,22 +2,42 @@
   box-sizing: border-box;
 }
 
+body.light-mode {
+  --background-color: #f0f0f0;
+  --text-color: #333;
+  --card-bg-color: #fff;
+  --input-bg-color: #fff;
+  --input-text-color: #333;
+  --button-bg-color: #4caf50;
+}
+
+body.dark-mode {
+  --background-color: #333;
+  --text-color: #f0f0f0;
+  --card-bg-color: #000;
+  --input-bg-color: #555;
+  --input-text-color: #fff;
+  --button-bg-color: #555;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
   max-width: 800px;
   margin: 60px auto;
   padding: 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
 .navbar {
@@ -25,9 +45,9 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #4caf50;
+  background-color: var(--button-bg-color);
   padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
 
@@ -41,7 +61,7 @@ body {
 }
 
 .navbar a {
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
@@ -49,13 +69,9 @@ body {
   border-radius: 4px;
 }
 
-.navbar a:hover {
-  background-color: #45a049;
-}
-
 #current-date {
-  background-color: #4caf50;
-  color: white;
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
   font-size: 18px;
   padding: 8px;
   border-radius: 4px;
@@ -80,6 +96,9 @@ textarea {
   border-radius: 4px;
   font-size: 16px;
   max-width: 100%;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 textarea {
@@ -88,7 +107,7 @@ textarea {
 }
 
 button {
-  background-color: #4caf50;
+  background-color: var(--button-bg-color);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -120,10 +139,11 @@ button:hover {
   align-items: center;
   padding: 10px;
   margin: 5px 0;
-  background-color: #fff;
+  background-color: var(--card-bg-color);
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .edit-btn,
@@ -158,6 +178,8 @@ button:hover {
   font-size: 16px;
   width: 100%;
   max-width: 100%;
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
 }
 
 #new-task,
@@ -169,4 +191,7 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  transition: background-color 0.3s ease;
 }
