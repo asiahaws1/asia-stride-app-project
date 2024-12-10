@@ -19,15 +19,18 @@ const moodEmojis = {
   Tired: '😴'
 };
 
+let moodSelections = [];
+
 moodSelect.addEventListener('change', () => {
   const mood = moodSelect.value;
   if (!mood) return;
 
   moodDisplay.innerHTML = `${mood} ${moodEmojis[mood] || ''}`;
-  moodHistory.innerHTML = '';
   const historyItem = document.createElement('li');
   historyItem.innerHTML = `${mood} ${moodEmojis[mood] || ''}`;
   moodHistory.appendChild(historyItem);
+
+  moodSelections.push(mood);
   journalPrompt.textContent = prompts[mood] || 'You must select a mood to see a journal prompt.';
 });
 
@@ -71,13 +74,32 @@ function renderTasks() {
   taskList.innerHTML = '';
   tasks.forEach((task, index) => {
     const li = document.createElement('li');
-    li.textContent = `${task.text} - ${task.category} - Due: ${task.dueDate}`;
+    li.innerHTML = `${task.text} - ${task.category} - Due: ${task.dueDate}`;
+
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => {
+      const editInput = document.createElement('input');
+      editInput.value = task.text;
+      const saveEditButton = document.createElement('button');
+      saveEditButton.textContent = 'Save Edit';
+      saveEditButton.addEventListener('click', () => {
+        task.text = editInput.value;
+        renderTasks();
+      });
+      li.innerHTML = '';
+      li.appendChild(editInput);
+      li.appendChild(saveEditButton);
+    });
+
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
       tasks.splice(index, 1);
       renderTasks();
     });
+
+    li.appendChild(editButton);
     li.appendChild(deleteButton);
     taskList.appendChild(li);
   });
@@ -94,20 +116,45 @@ function renderGoals() {
 
   goals.forEach((goal, index) => {
     const li = document.createElement('li');
-    li.textContent = goal.text;
+    li.innerHTML = goal.text;
+
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => {
+      const editInput = document.createElement('input');
+      editInput.value = goal.text;
+      const saveEditButton = document.createElement('button');
+      saveEditButton.textContent = 'Save';
+      saveEditButton.addEventListener('click', () => {
+        goal.text = editInput.value;
+        renderGoals();
+      });
+      li.innerHTML = '';
+      li.appendChild(editInput);
+      li.appendChild(saveEditButton);
+    });
 
     const markCompleteButton = document.createElement('button');
     markCompleteButton.textContent = 'Mark as Completed';
     markCompleteButton.addEventListener('click', () => {
-      goal.complete = !goal.complete;
+      if (!goal.complete) {
+        goal.complete = true;
+        goal.completedDate = new Date().toLocaleDateString('en-US');
+      } else {
+        goal.complete = false;
+        goal.completedDate = '';
+      }
       renderGoals();
     });
 
-    li.appendChild(markCompleteButton);
-
     if (goal.complete) {
+      const completedInfo = document.createElement('span');
+      completedInfo.textContent = ` Completed on: ${goal.completedDate}`;
+      li.appendChild(completedInfo);
       completedGoalsList.appendChild(li);
     } else {
+      li.appendChild(editButton);
+      li.appendChild(markCompleteButton);
       goalList.appendChild(li);
     }
   });
@@ -121,7 +168,8 @@ addGoalButton.addEventListener('click', () => {
 
   const newGoal = {
     text: goalText,
-    complete: false
+    complete: false,
+    completedDate: ''
   };
 
   goals.push(newGoal);

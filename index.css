@@ -33,7 +33,7 @@ body {
 .app-container {
   max-width: 1000px;
   margin: 80px auto 40px auto;
-  padding: 20px;
+  padding: 20px 30px;
   background: var(--card-bg-color);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
@@ -46,7 +46,7 @@ body {
   left: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.95);
-  padding: 15px 20px;
+  padding: 8px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
@@ -57,15 +57,15 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 20px;
+  align-items: center;
 }
 
 .navbar a {
   color: var(--text-color);
   text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 8px 16px;
+  font-weight: normal;
+  font-size: 1.6rem;
+  padding: 6px 12px;
   border-radius: 8px;
   transition: background-color 0.2s ease;
 }
@@ -75,12 +75,12 @@ body {
 }
 
 .theme-toggle {
-  padding: 10px 20px;
+  padding: 8px 16px;
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1.6rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -92,11 +92,11 @@ body {
 #current-date {
   background-color: rgba(255, 255, 255, 0.9);
   color: var(--text-color);
-  font-size: 18px;
-  padding: 8px;
+  font-size: 16px;
+  padding: 8px 12px;
   border-radius: 8px;
   text-align: center;
-  margin: 20px 0;
+  margin: 12px 0;
 }
 
 input[type="text"],
@@ -104,19 +104,16 @@ input[type="date"],
 select,
 textarea {
   width: 100%;
-  padding: 12px;
-  margin: 8px 0 16px;
+  padding: 10px 12px;
+  margin: 10px 0 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
   max-width: 100%;
-  background-color: var(--input-bg-color);
-  color: var(--input-text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 textarea {
-  height: 120px;
+  height: 100px;
   resize: none;
 }
 
@@ -127,7 +124,7 @@ button {
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   transition: background 0.3s ease;
 }
 
@@ -151,12 +148,12 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  margin: 6px 0;
-  background-color: #ffffff;
+  padding: 10px 12px;
+  margin: 4px 0;
+  background-color: #f3f4f6;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .edit-btn,
@@ -166,7 +163,7 @@ button:hover {
   border-radius: 6px;
   cursor: pointer;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .edit-btn {
@@ -183,4 +180,24 @@ button:hover {
 
 .complete-btn:hover {
   background-color: #c0392b;
+}
+
+.journal-section,
+.mood-section,
+.tasks-section,
+.goals-section {
+  background: linear-gradient(to bottom, #f8d7da, #f3e5f5, #e0f7fa, #fff9c4);
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin: 16px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.journal-section:hover,
+.mood-section:hover,
+.tasks-section:hover,
+.goals-section:hover {
+  transform: scale(1.03);
+  transition: transform 0.2s ease;
 }
